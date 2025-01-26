@@ -1,0 +1,488 @@
+:root {
+    --section-1-bg: #4A2B29;
+    --section-1-accent: #E8C3A5;
+    --section-2-bg: #F7D154;
+    --section-2-accent: #C66127;
+    --section-3-bg: #1E293B;
+    --section-3-accent: #94A3B8;
+    
+    --arc-bg: #f5f5f7;
+    --arc-card-bg: rgba(255, 255, 255, 0.08);
+    --arc-primary: #007AFF;
+    --arc-text: #1d1d1f;
+    --arc-secondary-text: #6e6e73;
+    --arc-border: rgba(255, 255, 255, 0.1);
+    --arc-radius: 16px;
+    --arc-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --arc-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+}
+
+body {
+    font-family: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: var(--arc-bg);
+    color: var(--arc-text);
+    line-height: 1.5;
+}
+
+.arc-header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.header-text {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    text-align: center;
+    color: white;
+    width: 90%;
+    max-width: 800px;
+}
+
+.header-text h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.subtitle {
+    font-size: 1.75rem;
+    opacity: 0.9;
+}
+
+.arc-main {
+    position: relative;
+}
+
+.content-section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 为每个章节设置不同的背景色 */
+.content-section:nth-child(1) {
+    background-color: var(--section-1-bg);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.content-section:nth-child(2) {
+    background-color: var(--section-2-bg);
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.content-section:nth-child(3) {
+    background-color: var(--section-3-bg);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 左侧标题区域 */
+.section-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 4rem;
+    text-align: left;
+    z-index: 1;
+}
+
+/* 右侧内容区域 */
+.section-content {
+    width: 55%;
+    margin-left: auto;
+    padding: 3rem;
+    padding-left: 0;
+    max-width: none;
+}
+
+/* 装饰性图形 */
+.section-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.1;
+    mix-blend-mode: overlay;
+}
+
+/* 卡片容器样式优化 */
+.arc-card {
+    background: var(--arc-card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--arc-border);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+}
+
+/* 调整标题样式以适应左侧布局 */
+.section-number {
+    font-size: 5rem;
+    font-weight: 800;
+    opacity: 0.2;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 600;
+    max-width: 380px;
+}
+
+.topic-group {
+    margin-bottom: 1.5rem;
+}
+
+.topic-group:last-child {
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+strong {
+    color: var(--arc-primary);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* 每个章节的强调色 */
+.content-section:nth-child(1) strong,
+.content-section:nth-child(1) h4 {
+    color: var(--section-1-accent);
+}
+
+.content-section:nth-child(2) strong,
+.content-section:nth-child(2) h4 {
+    color: var(--section-2-accent);
+}
+
+.content-section:nth-child(3) strong,
+.content-section:nth-child(3) h4 {
+    color: var(--section-3-accent);
+}
+
+/* 引用样式 */
+.quote {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 2rem 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid currentColor;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .section-header {
+        padding: 0 2rem;
+    }
+
+    .section-content {
+        padding: 2rem;
+        padding-left: 0;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 基础布局调整 */
+    .content-section {
+        flex-direction: column;
+        position: relative;
+        padding: 0;
+    }
+
+    /* 标题区域优化 */
+    .section-header {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        position: sticky;
+        top: 0;
+        padding: 1.5rem;
+        background: inherit; /* 继承父级背景色 */
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* 调整标题样式 */
+    .section-number {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        max-width: none;
+        text-align: left;
+    }
+
+    /* 内容区域调整 */
+    .section-content {
+        width: 100%;
+        padding: 1.5rem;
+        margin-top: 0;
+    }
+
+    /* 卡片样式优化 */
+    .arc-card {
+        margin: 0 0 1.5rem 0;
+        width: 100%;
+    }
+
+    /* 结论部分特殊处理 */
+    .content-section.conclusion .section-header {
+        background-color: var(--section-3-bg);
+    }
+
+    .content-section.conclusion .section-content {
+        padding: 1.5rem;
+    }
+
+    .content-section.conclusion .arc-card {
+        padding: 0 1rem;
+    }
+
+    .content-section.conclusion .arc-card p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    /* 优化滚动体验 */
+    .section-content {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* 添加滚动过渡效果 */
+.section-header {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* 滚动时的标题样式 */
+@media (max-width: 768px) {
+    .section-header.scrolled {
+        padding: 1rem 1.5rem;
+        background-color: rgba(30, 41, 59, 0.95); /* 深色背景 */
+    }
+
+    .section-header.scrolled .section-number {
+        font-size: 2rem;
+        opacity: 0.15;
+    }
+
+    .section-header.scrolled h2 {
+        font-size: 1.4rem;
+        margin: 0;
+    }
+}
+
+/* 优化滚动体验 */
+.section-content {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--arc-primary) transparent;
+}
+
+.section-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.section-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.section-content::-webkit-scrollbar-thumb {
+    background-color: currentColor;
+    opacity: 0.2;
+}
+
+/* 优化卡片动画 */
+.arc-card {
+    opacity: 0;
+    transform: translateX(15px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.arc-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 为结论部分添加特殊样式 */
+.content-section:last-child {
+    background-color: #1E293B;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.content-section:last-child .section-header {
+    width: 35%;
+}
+
+.content-section:last-child .section-content {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4rem;
+}
+
+/* 结论卡片的特殊样式 */
+.content-section:last-child .arc-card {
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    padding: 0;
+    max-width: 800px;
+    text-align: left;
+    box-shadow: none;
+}
+
+.content-section:last-child .arc-card p {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* 更新高亮样式 */
+.content-section:last-child strong {
+    color: #FFD700; /* 金黄色 */
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+/* 添加引用样式 */
+.content-section:last-child .highlight {
+    color: #FF4D4D; /* 亮红色 */
+    font-style: italic;
+}
+
+/* 为关键词添加下划线效果 */
+.content-section:last-child strong::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #FFD700;
+    opacity: 0.4;
+}
+
+/* 添加特殊引用样式 */
+.content-section:last-child .quote {
+    font-size: 2rem;
+    line-height: 1.3;
+    margin: 2rem 0;
+    padding-left: 2rem;
+    border-left: 4px solid #FFD700;
+    color: #FFD700;
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .content-section:last-child .section-content {
+        padding: 0 2rem;
+    }
+    
+    .content-section:last-child .arc-card p {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-section:last-child {
+        padding: 2rem;
+    }
+    
+    .content-section:last-child .section-header,
+    .content-section:last-child .section-content {
+        width: 100%;
+        padding: 2rem 0;
+    }
+    
+    .content-section:last-child .arc-card p {
+        font-size: 1.4rem;
+        text-align: left;
+    }
+    
+    .content-section:last-child .quote {
+        font-size: 1.6rem;
+        padding-left: 1.5rem;
+    }
+} 
