@@ -194,25 +194,48 @@
             observer.observe(card);
         });
 
-        // 添加标题滚动处理
+        // 优化的标题滚动处理
         if (window.innerWidth <= 768) {
-            const headers = document.querySelectorAll('.section-header');
-            let lastScrollY = window.scrollY;
-            
-            window.addEventListener('scroll', () => {
-                headers.forEach(header => {
-                    const rect = header.getBoundingClientRect();
-                    if (rect.top <= 0) {
-                        header.classList.add('scrolled');
+            const sections = document.querySelectorAll('.content-section');
+            let ticking = false;
+
+            function handleScroll() {
+                sections.forEach(section => {
+                    const header = section.querySelector('.section-header');
+                    const rect = section.getBoundingClientRect();
+                    const headerRect = header.getBoundingClientRect();
+                    
+                    // 计算section在视口中的位置
+                    if (rect.top <= 0 && rect.bottom >= headerRect.height) {
+                        if (!header.classList.contains('scrolled')) {
+                            header.classList.add('scrolled');
+                        }
                     } else {
-                        header.classList.remove('scrolled');
+                        if (header.classList.contains('scrolled')) {
+                            header.classList.remove('scrolled');
+                        }
                     }
                 });
+            }
+
+            // 使用 requestAnimationFrame 优化滚动性能
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
             }, { passive: true });
+
+            // 初始检查
+            handleScroll();
         }
 
-        // 添加触摸滚动优化
+        // 优化触摸体验
         document.addEventListener('touchstart', () => {}, { passive: true });
+        document.addEventListener('touchmove', () => {}, { passive: true });
     </script>
 </body>
 </html> 

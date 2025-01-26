@@ -256,11 +256,11 @@ strong {
 }
 
 @media (max-width: 768px) {
-    /* 基础布局调整 */
     .content-section {
         flex-direction: column;
         position: relative;
         padding: 0;
+        overflow: hidden;
     }
 
     /* 标题区域优化 */
@@ -268,13 +268,62 @@ strong {
         width: 100%;
         height: auto;
         min-height: auto;
+        position: -webkit-sticky;
         position: sticky;
         top: 0;
         padding: 1.5rem;
-        background: inherit; /* 继承父级背景色 */
         z-index: 10;
+        transform: translateZ(0);
+        will-change: transform;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 标题背景处理 */
+    .section-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+    }
+
+    .section-header.scrolled::before {
+        opacity: 0.98;
+    }
+
+    /* 内容区域优化 */
+    .section-content {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        margin-top: 0;
+        position: relative;
+        z-index: 1;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 滚动时的标题样式 */
+    .section-header.scrolled {
+        padding: 1rem 1.5rem;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-header.scrolled .section-number {
+        font-size: 2rem;
+        opacity: 0.15;
+        transition: all 0.3s ease;
+    }
+
+    .section-header.scrolled h2 {
+        font-size: 1.4rem;
+        margin: 0;
+        transition: all 0.3s ease;
     }
 
     /* 调整标题样式 */
@@ -323,29 +372,6 @@ strong {
     /* 优化滚动体验 */
     .section-content {
         -webkit-overflow-scrolling: touch;
-    }
-}
-
-/* 添加滚动过渡效果 */
-.section-header {
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-/* 滚动时的标题样式 */
-@media (max-width: 768px) {
-    .section-header.scrolled {
-        padding: 1rem 1.5rem;
-        background-color: rgba(30, 41, 59, 0.95); /* 深色背景 */
-    }
-
-    .section-header.scrolled .section-number {
-        font-size: 2rem;
-        opacity: 0.15;
-    }
-
-    .section-header.scrolled h2 {
-        font-size: 1.4rem;
-        margin: 0;
     }
 }
 
